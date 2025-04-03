@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Athish D's Portfolio - Explore my skills and contact me for more information.">
+    <title>Athish Portfolio</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        :root {
+            --font-family: 'Roboto', sans-serif;
+            --primary-color: #ffffff; /* White background */
+            --secondary-color: #f0f0f0;
+            --accent-color: #ffd700; /* Golden color */
+            --light-color: #333333;
+            --dark-color: #0f3460;
+        }
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background: var(--primary-color);
+            color: var(--light-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--secondary-color);
+            color: var(--light-color);
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            font-size: 1.5rem;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            padding: 0.5rem;
+            font-size: 2rem;
+        }
+        .header hr {
+            border: none;
+            height: 2px;
+            background-color: var(--accent-color);
+            width: 80%;
+            margin: auto;
+        }
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .button-container button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .button-container button:hover {
+            background: var(--dark-color);
+        }
+        .container {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section {
+            display: none;
+            background: var(--secondary-color);
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            width: 100%;
+            max-width: 800px;
+        }
+        .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .skill {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .progress {
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress div {
+            height: 1rem;
+            border-radius: 20px;
+            background: var(--accent-color);
+            width: 0;
+            transition: width 2s ease-in-out;
+        }
+        .progress span {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #000000; /* Black color for numbers and % */
+        }
+        #about {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #about img {
+            max-width: 150px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            margin-top: 1rem;
+        }
+        #about p {
+            font-weight: bold;
+            color: var(--light-color);
+        }
+        .highlight {
+            color: var(--accent-color);
+        }
+        form label, form input, form button {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        form input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+        form button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        form button:hover {
+            background: var(--dark-color);
+        }
+        .download-button {
+            margin-top: 1rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+        .download-button:hover {
+            background: var(--dark-color);
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            // Show the selected section
+            const section = document.getElementById(sectionId);
+            section.style.display = 'block';
+
+            // Animate progress bars if the section is skills
+            if (sectionId === 'skills') {
+                document.querySelectorAll('.progress div').forEach(progress => {
+                    const progressWidth = progress.parentElement.getAttribute('data-progress-width');
+                    progress.style.width = progressWidth;
+                });
+            }
+        }
+
+        // Show the Home section by default
+        window.onload = function() {
+            showSection('home');
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <h1>Athish D's Portfolio</h1>
+        <hr>
+        <div class="button-container">
+            <button onclick="showSection('home')">Home</button>
+            <button onclick="showSection('about')">About</button>
+            <button onclick="showSection('skills')">Skills</button>
+            <button onclick="showSection('contact')">Contact</button>
+        </div>
+    </header>
+    <div class="container">
+        <section id="home" class="section" style="display: block;">
+            <h2>Hello, I am <span class="highlight">Athish D</span>, a student</h2>
+            <p>Explore my skills and contact me for more information.</p>
+        </section>
+        <section id="about" class="section">
+            <div>
+                <h2>About Me</h2>
+                <p>I am <span class="highlight">Athish D</span>, Student at KPR College of Arts Science and Research. Motivated and hardworking student with strong problem-solving skills and a passion for learning, seeking opportunities to apply academic knowledge and gain practical experience.</p>
+            </div>
+            <img src="me.jpg" alt="Athish D">
+        </section>
+        <section id="skills" class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill">
+                    <img src="HTML5_logo_.png" alt="HTML" style="width: 30px;">
+                    <div class="progress" data-progress-width="85%">
+                        <div></div>
+                        <span>85%</span>
+                    </div>
+                </div>
+                <div class="skill">
+                    <img src="java logo.png" alt="Java" style="width: 30px;">
+                    <div class="progress" data-progress-width="75%">
+                        <div></div>
+                        <span>75%</span>
+                    </div>
+                </div>
+                <div class="skill">
+                    <img src="c logo.png" alt="C" style="width: 30px;">
+                    <div class="progress" data-progress-width="70%">
+                        <div></div>
+                        <span>70%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="section">
+            <h2>Contact Me</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <a href="resume.jpg" class="download-button" download>Download Resume</a>
+        </section>
+    </div>
+</body>
+</html>
